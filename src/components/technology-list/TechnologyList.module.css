@@ -1,0 +1,21 @@
+.technologyList {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 95vh;
+}
+.technologyList .title {
+  display: inline-block;
+  width: 100%;
+  height: 20px;
+  text-align: center;
+  font-size: 1em;
+  border-bottom: 1px solid white;
+}
+.technologyList .list {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: -webkit-fill-available;
+}
+.technologyList .item {
+  padding: 5px;
+}/*# sourceMappingURL=TechnologyList.module.css.map */

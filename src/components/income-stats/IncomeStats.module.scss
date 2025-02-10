@@ -1,0 +1,23 @@
+.stats {
+    width: 110px;
+    height: 22px;
+    border-radius: 20px;
+    background-color: #474747;
+    display: flex;
+    align-items: center;
+
+    .value {
+        border-radius: 20px;
+        background-color: #5d5d5d;
+        width: 80px;
+        height: 18px;
+        display: inline-block;
+        margin: 2px;
+        text-align: right;
+    }
+    .icon {
+        width: 20px;
+        height: 20px;
+        fill: #e6e6e6;
+    }
+}

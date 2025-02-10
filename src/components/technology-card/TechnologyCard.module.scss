@@ -1,0 +1,79 @@
+.TechnologyCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    height: 110px;
+    position: relative;
+    
+    .title {
+        font-size: 1em;
+    }
+    .version {
+        font-size: 0.9em;
+    }
+
+    &>div {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    img {
+        width: 40px;
+        height: 40px;
+    }
+    .button {
+        width: 100px;
+        height: 35px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+    .info {
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        background-color: #2b2b2b;
+        opacity: 0.5;
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            background-color: #181818;
+            position: absolute;
+            left: 3px;
+            top: 3px;
+        }
+
+        .content {
+            display: none;
+            padding: 5px;
+            font-size: 0.8em;
+        }
+
+        &:hover {
+            width: 193px;
+            height: 100px;
+            opacity: 1;
+
+            .content {
+                display: block;
+                overflow-y: scroll;
+            }
+            .icon {
+                display: none;
+            }
+        }
+        
+    }
+}
