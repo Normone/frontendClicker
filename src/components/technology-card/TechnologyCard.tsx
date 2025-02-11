@@ -7,6 +7,7 @@ import styles from "./TechnologyCard.module.css";
 import { Technology } from '@/types/technologies';
 import { RootState } from '@/store';
 import { addMoney, updateMultiplier } from '@/store/gameSlice';
+import basePath from '@/data/basePath';
 
 interface TechnologyCardProps {
     technology: Technology;
@@ -45,10 +46,11 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({ technology }) => {
             <div>
                 {/* <img src={`imgs/${technology.name}.svg`} alt={`${technology.name} icon`} /> */}
                 <Image
-                    src={`/imgs/${technology.name}.svg`}
+                    src={`${basePath}/imgs/${technology.name}.svg`}
                     alt={`${technology.name} icon`}
                     width={40}
                     height={40}
+                    unoptimized 
                 />
                 <span className={styles.title}>{technology.name} </span>
                 <span className={styles.version}>(v{technology.version})</span>

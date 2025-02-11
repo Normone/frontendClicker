@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addMoney } from '@/store/gameSlice';
 import { RootState } from '@/store';
 import styles from './ClickBtn.module.css';
+import basePath from '@/data/basePath';
 
 // interface ClickBtnProps {}
 
@@ -20,11 +21,12 @@ export const ClickBtn: React.FC = () => {
         <div className={styles.clickBtn}>
             {/* <img src="imgs/galera.jpg" alt="click button" onClick={handleClick}/> */}
             <Image
-                src={`/imgs/galera.jpg`}
+                src={`${basePath}/imgs/galera.jpg`}
                 alt={`click button`}
                 width={100}
                 height={100}
                 onClick={handleClick}
+                unoptimized
             />
         </div>
     );
