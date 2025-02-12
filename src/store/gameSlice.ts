@@ -47,7 +47,7 @@ const gameSlice = createSlice({
             const technology = state.technologies.technologies.find((tech) => tech.id === action.payload);
             if (technology) {
                 technology.version += 1;
-                technology.income = 1 + (technology.version * 0.5);
+                technology.income = technology.income * 2;
             }
         },
         addMoney: (state, action: PayloadAction<number>) => {

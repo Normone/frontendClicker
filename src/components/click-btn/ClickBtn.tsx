@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMoney } from '@/store/gameSlice';
@@ -16,6 +16,7 @@ interface Animation {
     translateX: number;
     translateY: number;
     value: string;
+    opacity: number;
 }
 
 export const ClickBtn: React.FC = () => {
@@ -30,7 +31,7 @@ export const ClickBtn: React.FC = () => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         dispatch(addMoney(clickMultiplier));
 
-        const clickValue = clickMultiplier; // Replace with your actual click value
+        const clickValue = clickMultiplier;
         setClicks(clicks + clickValue);
 
         // Get coordinates relative to the button
@@ -38,25 +39,35 @@ export const ClickBtn: React.FC = () => {
         const y = e.nativeEvent.offsetY;
 
         // Generate random translation values for this animation
-        const translateX = Math.random() * 40 - 20;
-        const translateY = Math.random() * 40 - 20;
+        const translateX = Math.random() * 80 - 40;
+        const translateY = Math.random() * 80 - 40;
 
         // Create a new animation object
         const animation: Animation = {
             id: Date.now(), // Unique ID for each animation
             x: x,    // Mouse X position relative to div
             y: y,    // Mouse Y position relative to div
-            translateX: translateX, // Store the random X translation
-            translateY: translateY, // Store the random Y translation
+            translateX: 0, // Store the random X translation
+            translateY: 0, // Store the random Y translation
             value: `+${clickValue}`, // Value to display
+            opacity: 1,
         };
 
         setAnimations([...animations, animation]);
 
+
+        setTimeout(() => {
+            setAnimations(prevAnimations =>
+                prevAnimations.map(anim =>
+                    anim.id === animation.id ? { ...anim, opacity: 0, translateX, translateY } : anim
+                )
+            );
+        }, 1);
+
         // Remove the animation after 1 second
         setTimeout(() => {
             setAnimations(prevAnimations => prevAnimations.filter(anim => anim.id !== animation.id));
-        }, 1000);
+        }, 1500);
     };
 
     
@@ -80,8 +91,8 @@ export const ClickBtn: React.FC = () => {
                             left: animation.x,
                             top: animation.y,
                             pointerEvents: 'none',
-                            opacity: 1, // Start with opacity 1
-                            transition: 'opacity 1s ease-out, transform 1s ease-out', // Fade out and move
+                            opacity: animation.opacity, // Start with opacity 1
+                            transition: 'opacity 1.5s ease-out, transform 1.5s ease-out', // Fade out and move
                             transform: `translate(${animation.translateX}px, ${animation.translateY}px)`, // Move to a random position
                             
                         }
