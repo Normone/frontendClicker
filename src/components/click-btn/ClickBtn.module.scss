@@ -1,8 +1,29 @@
 .clickBtn {
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:active {
+        transform: scale(1.05); /* Увеличение при нажатии */
+        transition: transform 0.1s ease-in-out;
+    }
     
+    span {
+        transition: all 1s ease;
+        opacity: 0;
+    }
 
     img {
         max-width: -webkit-fill-available;
 
+    }
+    button {
+        position: relative;
     }
 }

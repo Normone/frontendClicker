@@ -50,6 +50,7 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({ technology }) => {
                     alt={`${technology.name} icon`}
                     width={40}
                     height={40}
+                    draggable="false"
                     unoptimized 
                 />
                 <span className={styles.title}>{technology.name} </span>

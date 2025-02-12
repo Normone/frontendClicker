@@ -1,3 +1,25 @@
+@charset "UTF-8";
+.clickBtn {
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clickBtn:active {
+  transform: scale(1.05); /* Увеличение при нажатии */
+  transition: transform 0.1s ease-in-out;
+}
+.clickBtn span {
+  transition: all 1s ease;
+  opacity: 0;
+}
 .clickBtn img {
   max-width: -webkit-fill-available;
+}
+.clickBtn button {
+  position: relative;
 }/*# sourceMappingURL=ClickBtn.module.css.map */
