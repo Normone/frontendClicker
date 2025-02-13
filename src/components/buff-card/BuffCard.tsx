@@ -56,6 +56,7 @@ const BuffCard: React.FC<BuffCardProps> = ({ buff }) => {
                         draggable="false"
                         unoptimized 
                         />
+                        <span>({buff.duration})</span>
                     </div>
                 
                 ):(null)}
