@@ -7,6 +7,7 @@ import styles from "./BuffCard.module.css";
 import { RootState } from '@/store';
 import { addMoney } from '@/store/gameSlice';
 import { Buff } from '@/types/buffs';
+import basePath from '@/data/basePath';
 
 interface BuffCardProps {
     buff: Buff;
@@ -48,7 +49,7 @@ const BuffCard: React.FC<BuffCardProps> = ({ buff }) => {
                 {buff.isActive ? (
                     <div className={styles.buffActive}>
                         <Image
-                        src={`/imgs/buffActive.gif`}
+                        src={`${basePath}/imgs/buffActive.gif`}
                         alt={`${buff.name} active`}
                         width={26}
                         height={26}
