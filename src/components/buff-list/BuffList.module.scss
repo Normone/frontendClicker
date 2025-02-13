@@ -1,0 +1,25 @@
+.buffList {
+    
+    width: fit-content;
+    height: 75vh;
+
+    
+
+    .title {
+        display: inline-block;
+        width: 100%;
+        height: 20px;
+        text-align: center;
+        font-size: 1em;
+        border-bottom: 1px solid white;
+    }
+
+    .list {
+        overflow-x: hidden;
+        overflow-y:scroll;
+        height: -webkit-fill-available;
+    }
+    .item {
+        padding: 5px;
+    }
+}

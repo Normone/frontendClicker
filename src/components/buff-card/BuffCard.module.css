@@ -1,4 +1,4 @@
-.TechnologyCard {
+.BuffCard {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,51 +6,57 @@
   height: 110px;
   position: relative;
 }
-.TechnologyCard .title {
+.BuffCard .title {
   font-size: 1em;
 }
-.TechnologyCard .version {
+.BuffCard .effect {
   font-size: 0.9em;
 }
-.TechnologyCard > div {
+.BuffCard .effectDesc {
+  font-size: 0.8em;
+}
+.BuffCard .buffActive {
+  position: absolute;
+  left: 75px;
+  top: 0px;
+}
+.BuffCard > div {
   width: 50%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
 }
-.TechnologyCard img {
-  width: 40px;
-  height: 40px;
-}
-.TechnologyCard .button {
+.BuffCard .button {
   width: 100px;
   height: 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.TechnologyCard .info {
-  width: 26px;
-  height: 26px;
+.BuffCard .info {
+  width: 18px;
+  height: 18px;
   position: absolute;
-  left: 5px;
-  top: 5px;
+  left: 4px;
+  top: 4px;
   background-color: #2b2b2b;
   opacity: 0.5;
+  z-index: 1;
 }
-.TechnologyCard .info .icon {
+.BuffCard .info .icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background-color: #181818;
   position: absolute;
-  left: 3px;
-  top: 3px;
+  left: 0px;
+  top: 0px;
 }
-.TechnologyCard .info .content {
+.BuffCard .info .content {
   display: none;
   padding: 5px;
   font-size: 0.8em;
@@ -58,15 +64,15 @@
      -moz-user-select: none;
           user-select: none;
 }
-.TechnologyCard .info:hover {
+.BuffCard .info:hover {
   width: 193px;
   height: 100px;
   opacity: 1;
 }
-.TechnologyCard .info:hover .content {
+.BuffCard .info:hover .content {
   display: block;
   overflow-y: scroll;
 }
-.TechnologyCard .info:hover .icon {
+.BuffCard .info:hover .icon {
   display: none;
-}/*# sourceMappingURL=TechnologyCard.module.css.map */
+}/*# sourceMappingURL=BuffCard.module.css.map */

@@ -6,6 +6,7 @@ import { TechnologyList } from "@/components/technology-list/TechnologyList";
 import { ClickBtn } from "@/components/click-btn/ClickBtn";
 import { IncomeStats } from "@/components/income-stats/IncomeStats";
 import { RootState, AppDispatch } from "@/store/index";
+import { BuffList } from "@/components/buff-list/BuffList";
 const LOCAL_STORAGE_KEY = 'gameFrontEndClickerSave';
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
+            dispatch(updateMultiplier());
             dispatch(tick());
         }, 1000);
 
@@ -55,6 +57,9 @@ export default function App() {
             </div>
             <div className={styles.clickBtn}>
                 <ClickBtn/>
+            </div>
+            <div className={styles.buffList}>
+                <BuffList/>
             </div>
             <button onClick={resetHundler}>reset</button>
         </div>

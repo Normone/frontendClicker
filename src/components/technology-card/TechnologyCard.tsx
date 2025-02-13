@@ -29,7 +29,7 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({ technology }) => {
         }
     };
     const handleUnlock = () => {
-        if (money >= upgradeCost) {
+        if (money >= technology.cost) {
             dispatch(unlockTechnology(technology.id));
             dispatch(addMoney(-upgradeCost));
             dispatch(updateMultiplier())

@@ -1,3 +1,3 @@
-const basePath = '/frontendClicker';
-// const basePath = '';
+// const basePath = '/frontendClicker';
+const basePath = '';
 export default basePath;
