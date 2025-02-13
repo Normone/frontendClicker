@@ -50,7 +50,6 @@ const gameSlice = createSlice({
         },
         unlockTechnology: (state, action: PayloadAction<number>) => {
             const technology = state.technologies.technologies.find((tech) => tech.id === action.payload);
-            const buff = state.technologies.technologies.find((tech) => tech.id === action.payload);
             if (technology && !technology.unlocked) {
                 technology.unlocked = true;
             }
@@ -61,7 +60,7 @@ const gameSlice = createSlice({
                 buff.unlocked = true;
             }
         },
-        useBuff: (state, action: PayloadAction<number>) => {
+        buffUse: (state, action: PayloadAction<number>) => {
             const buff = state.buffs.buffs.find((buff) => buff.id === action.payload);
             if (buff && buff.unlocked && buff.cooldown == 0) {
                 buff.isActive = true;
@@ -136,7 +135,7 @@ export const {
     unlockTechnology,
     unlockBuff,
     upgradeTechnology,
-    useBuff,
+    buffUse,
     addMoney,
     updateMultiplier,
     tick,

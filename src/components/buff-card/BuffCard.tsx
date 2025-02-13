@@ -2,11 +2,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
-import { unlockBuff, useBuff } from '@/store/gameSlice';
+import { unlockBuff, buffUse } from '@/store/gameSlice';
 import styles from "./BuffCard.module.css";
 import { RootState } from '@/store';
 import { addMoney } from '@/store/gameSlice';
-import basePath from '@/data/basePath';
 import { Buff } from '@/types/buffs';
 
 interface BuffCardProps {
@@ -20,7 +19,7 @@ const BuffCard: React.FC<BuffCardProps> = ({ buff }) => {
     const money = useSelector((state: RootState) => state.game.player.money);
 
     const handleUse = () => {
-        dispatch(useBuff(buff.id));
+        dispatch(buffUse(buff.id));
     };
     const handleUnlock = () => {
         if (money >= buff.cost) {
