@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addMoney } from '@/store/gameSlice';
 import { RootState } from '@/store';
 import styles from './ClickBtn.module.css';
-import basePath from '@/data/basePath';
+import { basePath } from '@/data';
 
 // interface ClickBtnProps {}
 

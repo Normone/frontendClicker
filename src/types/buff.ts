@@ -8,6 +8,7 @@ export interface Buff {
     baseDuration: number;
     cooldown: number;
     duration: number;
+    level?: number;
     cost: number;
     income: number;
     type: 'click' | 'auto';

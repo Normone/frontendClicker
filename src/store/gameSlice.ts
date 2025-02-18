@@ -1,17 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Technology } from '@/types/technologies';
-import { Buff } from '@/types/buffs';
-import { technologiesData } from '../data/technologiesData';
-import { buffsData } from '../data/buffsData';
+import { Technology, Buff, Worker, Technique } from '@/types';
+import { technologiesData, buffsData, workersData, techniqueData } from '@/data';
 
 
-
-interface TechnologiesState {
-    technologies: Technology[];
-}
-interface BuffsState {
-    buffs: Buff[]
-}
 
 interface PlayerState {
     money: number;
@@ -22,8 +13,10 @@ interface PlayerState {
 
 interface GameState {
     player: PlayerState;
-    technologies: TechnologiesState;
-    buffs: BuffsState;
+    technologies: Technology[];
+    buffs: Buff[];
+    workers: Worker[];
+    technique: Technique[];
 }
 
 const initialState: GameState = {
@@ -33,13 +26,16 @@ const initialState: GameState = {
         autoMultiplier: 0,
         prestigeLevel: 0,
     },
-    technologies: {
-        technologies: technologiesData,
-    },
-    buffs: {
-        buffs: buffsData,
-    }
+    technologies: technologiesData,
+    buffs: buffsData,
+    workers : workersData,
+    technique: techniqueData,
 };
+
+interface UnlockAndUpgradePayload {
+    id: number;
+    type: 'technology' | 'buff' | 'worker' | 'technique';
+}
 
 const gameSlice = createSlice({
     name: 'game',
@@ -48,31 +44,82 @@ const gameSlice = createSlice({
         loadState: (state, action: PayloadAction<GameState>) => { // Загрузка состояния из localStorage
             return action.payload;
         },
-        unlockTechnology: (state, action: PayloadAction<number>) => {
-            const technology = state.technologies.technologies.find((tech) => tech.id === action.payload);
-            if (technology && !technology.unlocked) {
-                technology.unlocked = true;
-            }
-        },
-        unlockBuff: (state, action: PayloadAction<number>) => {
-            const buff = state.buffs.buffs.find((buff) => buff.id === action.payload);
-            if (buff && !buff.unlocked) {
-                buff.unlocked = true;
+        unlockItem: (state, action: PayloadAction<UnlockAndUpgradePayload>) => {
+            const { id, type } = action.payload;
+            
+
+            switch (type) {
+                case 'technology':
+                    const technology = state.technologies.find((tech) => tech.id === id);
+                    
+                    if (technology && !technology.unlocked && state.player.money >= technology.cost) {
+                        technology.unlocked = true;
+                        state.player.money -= technology.cost;
+                    }
+                    break;
+                case 'buff':
+                    const buff = state.buffs.find((buff) => buff.id === id);
+                    if (buff && !buff.unlocked && state.player.money >= buff.cost) {
+                        buff.unlocked = true;
+                        state.player.money -= buff.cost;
+                    }
+                    break;
+                case 'worker':
+                    const worker = state.workers.find((worker) => worker.id === id);
+                    if (worker && !worker.unlocked && state.player.money >= worker.cost) {
+                        worker.unlocked = true;
+                        state.player.money -= worker.cost;
+                    }
+                    break;
+                // case 'technique':
+                //     const technique = state.technique.technique.find((technique) => technique.id === id);
+                //     if (technique && !technique.unlocked) {
+                //         technique.unlocked = true;
+                //     }
+                //     break;
+                    
+                default:
+                    console.warn(`Item with id ${id} of type ${type} not found or already unlocked.`);
+                    break;
             }
         },
         buffUse: (state, action: PayloadAction<number>) => {
-            const buff = state.buffs.buffs.find((buff) => buff.id === action.payload);
+            const buff = state.buffs.find((buff) => buff.id === action.payload);
             if (buff && buff.unlocked && buff.cooldown == 0) {
                 buff.isActive = true;
                 buff.cooldown = buff.baseCooldown;
                 buff.duration = buff.baseDuration;
             }
         },
-        upgradeTechnology: (state, action: PayloadAction<number>) => {
-            const technology = state.technologies.technologies.find((tech) => tech.id === action.payload);
-            if (technology) {
-                technology.version += 1;
-                technology.income = technology.income * 2;
+        upgradeItem: (state, action: PayloadAction<UnlockAndUpgradePayload>) => {
+            const { id, type } = action.payload;
+
+            switch (type) {
+                case 'technology':
+                    const technology = state.technologies.find((tech) => tech.id === id);
+                    if (technology) {
+                        technology.level += 1;
+                        technology.income = technology.income * 2;
+                    }
+                    break;
+                case 'worker':
+                    const worker = state.workers.find((worker) => worker.id === id);
+                    if (worker) {
+                        worker.level += 1;
+                        worker.income = worker.income * 2;
+                    }
+                    break;
+                // case 'technique':
+                //     const technique = state.technique.find((technique) => technique.id === id);
+                //     if (technique) {
+                //         technique.level += 1;
+                //         technique.income = technique.income * 2;
+                //     }
+                //     break;
+                    
+                default:
+                    console.warn(`Item with id ${id} of type ${type} not found or already unlocked.`);
+                    break;
             }
         },
         addMoney: (state, action: PayloadAction<number>) => {
@@ -85,17 +132,24 @@ const gameSlice = createSlice({
             // let buffBonusClick = 0;
             // let buffAutoClick = 0;
 
-            state.technologies.technologies.forEach(tech => {
+            state.technologies.forEach(tech => {
                 if (tech.unlocked) {
                     if (tech.type === 'click') {
                         newClickMultiplier += tech.income;
-                    } else if (tech.type === 'auto') {
-                        newAutoMultiplier += tech.income;
-                    }
+                    } 
+                    // else if (tech.type === 'auto') {
+                    //     newAutoMultiplier += tech.income;
+                    // }
                 }
             });
 
-            state.buffs.buffs.forEach(buff => {
+            state.workers.forEach(worker => {
+                if (worker.unlocked) {
+                    newAutoMultiplier += worker.income;
+                }
+            });
+
+            state.buffs.forEach(buff => {
                 if (buff.unlocked && buff.isActive && buff.duration > 0) {
                     if (buff.type === 'click') {
                         newClickMultiplier = newClickMultiplier * buff.income;
@@ -120,8 +174,10 @@ const gameSlice = createSlice({
             state.player.money = 0;
             state.player.clickMultiplier = 1;
             state.player.autoMultiplier = 0;
-            state.technologies.technologies = technologiesData;
-            state.buffs.buffs = buffsData;
+            state.technologies = technologiesData;
+            state.buffs = buffsData;
+            state.workers = workersData;
+            state.technique = techniqueData;
         },
         tick: (state) => {
             state.player.money += state.player.autoMultiplier;
@@ -132,9 +188,8 @@ const gameSlice = createSlice({
 
 export const {
     loadState,
-    unlockTechnology,
-    unlockBuff,
-    upgradeTechnology,
+    unlockItem,
+    upgradeItem,
     buffUse,
     addMoney,
     updateMultiplier,

@@ -1,10 +1,38 @@
-.TechnologyCard {
+.ItemCard {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 200px;
     height: 110px;
     position: relative;
+
+    .technology {
+
+    }
+    &.buff {
+
+
+        .effect {
+            font-size: 0.9em;
+        }
+        .effectDesc {
+            font-size: 0.8em;
+        }
+        .buffActive {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 70px;
+            top: 0px;
+    
+            span {
+                text-shadow: 1px 1px black;
+            }
+        }
+    }
+    .worker {
+
+    }
     
     .title {
         font-size: 1em;
@@ -22,10 +50,6 @@
         
     }
 
-    img {
-        width: 40px;
-        height: 40px;
-    }
     .button {
         width: 100px;
         height: 35px;

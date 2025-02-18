@@ -41,11 +41,26 @@
   grid-column: 3/4;
   grid-row: 1/4;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
   margin: 5px;
   border-radius: 20px;
   border: 1px solid;
   overflow: hidden;
+}
+.page .app .techList .switch {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.page .app .techList .switch button {
+  display: block;
+  width: 33%;
+  height: 40px;
+  background-color: #686868;
+}
+.page .app .techList .switch button.isActive {
+  background-color: #bdbdbd;
 }
 .page .app .clickBtn {
   grid-column: 2/3;

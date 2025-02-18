@@ -1,11 +1,10 @@
-export interface Technology {
+export interface Technique {
     id: number;
     name: string;
     description: string;
-    version: number;
+    imgSrc: string;
+    level: number;
     cost: number;
     income: number;
-    type: 'click' | 'auto';
     unlocked: boolean;
 }
-

@@ -1,9 +1,17 @@
-.buffList {
+.List {
     
     width: fit-content;
-    height: 75vh;
-
     
+
+    &.technology {
+        height: 89vh;
+    }
+    &.worker {
+        height: 89vh;
+    }
+    &.buff {
+        height: 75vh;
+    }
 
     .title {
         display: inline-block;
@@ -18,6 +26,7 @@
         overflow-x: hidden;
         overflow-y:scroll;
         height: -webkit-fill-available;
+        max-height: 100%;
     }
     .item {
         padding: 5px;

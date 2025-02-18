@@ -1,5 +1,5 @@
-import { Buff } from '@/types/buffs';
-import basePath from './basePath';
+import { Buff } from '@/types';
+import { basePath } from './basePath';
 
 export const buffsData: Buff[] = [
     {

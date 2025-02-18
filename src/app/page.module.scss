@@ -54,11 +54,32 @@
       grid-column: 3 / 4;
       grid-row: 1 / 4;
       display: flex;
-      justify-content: flex-end;
+      flex-direction: column;
+      justify-content: flex-start;
       margin: 5px;
       border-radius: 20px;
       border: 1px solid;
       overflow: hidden;
+
+      .switch {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      
+
+        button {
+          display: block;
+          width: 33%;
+          height: 40px;
+          background-color: #686868;
+
+          &.isActive {
+
+            background-color: #bdbdbd;
+          }
+        }
+      }
+      
     }
 
     .clickBtn {
