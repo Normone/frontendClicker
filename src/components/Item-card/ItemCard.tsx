@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { unlockItem, upgradeItem, updateMultiplier, buffUse } from '@/store/gameSlice';
 import { Technology, Buff, Worker, Technique } from '@/types';
 import { basePath } from '@/data';
+import { shortenNumber } from '@/utils/shortenNumber';
 
 interface ItemCardProps {
     data: Technology | Buff | Worker | Technique;
@@ -16,6 +17,7 @@ interface ItemCardProps {
 
 export const ItemCard: React.FC<ItemCardProps> = ({ data, type }) => {
     const dispatch = useDispatch();
+    
     const level = (data as Technology | Worker | Technique).level;
     const isAvtive = (data as Buff).isActive;
     const duration = (data as Buff).duration;
@@ -32,7 +34,8 @@ export const ItemCard: React.FC<ItemCardProps> = ({ data, type }) => {
         : 
         data.cost * (level * level);
     }
-    
+    const upgradeCostView: string = shortenNumber(upgradeCost);
+    const IncomeView = shortenNumber(data.income);
 
     const handleUpgrade = () => {
         dispatch(upgradeItem({id: data.id, type: type}));
@@ -71,17 +74,17 @@ export const ItemCard: React.FC<ItemCardProps> = ({ data, type }) => {
                     </div>
                     <div>
                         <span>Доход:</span>
-                        <span>{data.income}/click</span>
+                        <span>{IncomeView}/click</span>
         
                         {data.unlocked ? (
                             <button className={styles.button} onClick={() => handleUpgrade()}>
                                 <span>Улучшить</span>
-                                <span>({upgradeCost})</span>
+                                <span>({upgradeCostView})</span>
                             </button>
                         ) : (
                             <button className={styles.button} onClick={() => handleUnlock()}>
                                 <span>Разблокировать</span>
-                                <span>({upgradeCost})</span>
+                                <span>({upgradeCostView})</span>
                             </button>
                         )}
         
@@ -138,7 +141,7 @@ export const ItemCard: React.FC<ItemCardProps> = ({ data, type }) => {
                         ) : (
                             <button className={styles.button} onClick={() => handleUnlock()}>
                                 <span>Разблокировать</span>
-                                <span>({upgradeCost})</span>
+                                <span>({upgradeCostView})</span>
                             </button>
                         )}
         
@@ -167,19 +170,19 @@ export const ItemCard: React.FC<ItemCardProps> = ({ data, type }) => {
                     </div>
                     <div>
                         <span>Доход:</span>
-                        <span>{data.income}/s</span>
+                        <span>{IncomeView}/s</span>
         
                         {data.unlocked ? (
                             <>
                             <button className={styles.button} onClick={() => handleUpgrade()}>
                                 <span>Улучшить</span>
-                                <span>({upgradeCost})</span>
+                                <span>({upgradeCostView})</span>
                             </button>
                             </>
                         ) : (
                             <button className={styles.button} onClick={() => handleUnlock()}>
                                 <span>Разблокировать</span>
-                                <span>({upgradeCost})</span>
+                                <span>({upgradeCostView})</span>
                             </button>
                         )}
         

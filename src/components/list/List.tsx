@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './List.module.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { Technology, Buff, Worker, Technique } from "@/types";
+import { Technology, Buff, Worker,  } from "@/types";
 import { ItemCard } from '@/components';
 
 
@@ -13,9 +13,13 @@ interface ListProps {
 
 
 export const List: React.FC<ListProps> = ({type}) => {
+    const technologies = useSelector((state: RootState) => state.game.technologies);
+    const buffs = useSelector((state: RootState) => state.game.buffs);
+    const workers = useSelector((state: RootState) => state.game.workers);
+
+
     switch (type) {
         case 'technologies':
-            const technologies = useSelector((state: RootState) => state.game.technologies);
 
             return (
                 <div className={`${styles.List} ${styles.technology}`}>
@@ -30,7 +34,6 @@ export const List: React.FC<ListProps> = ({type}) => {
                 </div>
             );
         case 'buffs':
-            const buffs = useSelector((state: RootState) => state.game.buffs);
 
             return (
                 <div className={`${styles.List} ${styles.buff}`}>
@@ -45,7 +48,6 @@ export const List: React.FC<ListProps> = ({type}) => {
                 </div>
             );
         case 'workers':
-            const workers = useSelector((state: RootState) => state.game.workers);
 
             return (
                 <div className={`${styles.List} ${styles.worker}`}>
